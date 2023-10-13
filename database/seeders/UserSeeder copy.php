@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            UserSeeder::class,
-            ListsSeeder::class,
+        DB::table('users')->insert([
+        ['name'=>'b','email'=>'b@gmail.com','password'=>'password','sort_no'=>1],
+        ['name'=>'c','email'=>'c@gmail.com','password'=>'password','sort_no'=>2]
         ]);
         // \App\Models\User::factory(10)->create();
 

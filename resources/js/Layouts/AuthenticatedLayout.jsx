@@ -20,11 +20,7 @@ export default function Authenticated({ user, header, children }) {
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div>
+                           
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
@@ -55,9 +51,9 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}>プロフィール</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            ログアウト
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -104,9 +100,9 @@ export default function Authenticated({ user, header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>プロフィール</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
+                                ログアウト
                             </ResponsiveNavLink>
                         </div>
                     </div>

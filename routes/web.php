@@ -26,12 +26,14 @@ Route::get('/', function () {
 });
 
 //Route::get('/dashboard', function () {
-   // Route::get('/dashboard', [ListsController::class, 'index']);
-  //  return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+//    return Inertia::render('Dashboard');
+//}, [ListsController::class])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ListsController::class,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', [ListsController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::post('/dashboard', [ListsController::class, 'store'])->name('list.store');
+Route::delete('/dashboard/{id}', [ListsController::class, 'destroy'])->name('list.destroy');
+Route::patch('/dashboard/{id}', [ListsController::class, 'update'])->name('list.update');
+//Route::post('/dashboard/{id}', [ListsController::class, 'update'])->name('list.update');
 
 
 Route::middleware('auth')->group(function () {

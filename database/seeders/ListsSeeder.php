@@ -12,6 +12,11 @@ class ListsSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('lists')->insert([
+            ['title'=>'おかゆ','keyword'=>'おかゆん','user_id'=>1],
+            ['title'=>'おかゆ','keyword'=>'おかゆん','user_id'=>2],
+            ['title'=>'ころね','keyword'=>'ころさん','user_id'=>2]
+        ]);
         //
     }
 }

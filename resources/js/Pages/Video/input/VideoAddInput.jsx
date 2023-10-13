@@ -1,70 +1,137 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Button } from '@mui/material';
+import { useForm } from '@inertiajs/react';
+import { Stack } from '@mui/material';
+import { Youtube } from '@/Pages/Youtube/Youtube';
+import ClearIcon from '@mui/icons-material/Clear';
 export const VideoAddInput =({
-  inputText,
-  setInputText,
-  setVideoList,
-  videoList,
-  keyword,
-  setkeyword,
-  channelId,
-  setChannelId,
+  list,
+  keyword2,
+  setKeyword2,
+  channelId2,
+  setChannelId2,
+  listid,
+  listtitle,
+  listchannel,
+  listkeyword,
 })=> {
+  const [isClick,setIsClick] = useState(false);
+  const [inputCardTitle,setInputCardTitle] = useState("");
+
+  const {  data,setData,processing,patch,errors } = useForm({
+    id:{listid},
+    title: '',
+    channel:'',
+    keyword: '',
+  });
   
-  const handleSubmit =(e)=>{
-    e.preventDefault();
-    if(inputText === "") {
-      return;
-    }
-    setVideoList([
-      ...videoList,
-    {
-      text: inputText,
-      id:videoList.length,
-      draggableId: `video-${videoList.length}`,
-    },
-    ]);
-    setInputText("");
+
+  const handleClick = () =>{
+    setIsClick(true);
   };
-  
-  const handleChangeChannel= (e) =>{
-    setChannelId(e.target.value);
-  };
-  const handleChangeKeyword = (e) =>{
-    setkeyword(e.target.value)
+  const handleClose = ()=>{
+    setIsClick(false);
   };
 
+  const handleChange = (e) =>{
+    setInputCardTitle(e.target.value);
+    setData(e.target.name, e.target.value)
+  };
+
+  const handleChangeChannel= (e) =>{
+    setChannelId2(e.target.value);
+    setData(e.target.name, e.target.value)
+  };
+
+  const handleChangeKeyword = (e) =>{
+    setKeyword2(e.target.value);
+    setData(e.target.name, e.target.value)
+  };
+
+  const submit =(id)=>{
+    patch(route('list.update',id));
+  };
 
   return (
     <div>
-       <div style={{marginTop: '5px', textAlign:'center'}}>
-          <form >
+      <div onClick={handleClick}>  
+    
+      {isClick ? 
+      
+      <form  className='videoCardTitleInputArea'  >
+      
+        <table class ="row">
+          <tr key={listid}>
+            <Stack spacing={2}>
+
+          <td>リストタイトル:{listtitle}<br/>
+          <input 
+          type="text" 
+          name="title"
+          placeholder="タイトルを入れてね"
+          className="videoCardTitleInput"
+          onChange={handleChange} 
+         value={inputCardTitle}
+          maxLength="10"
+          ></input></td>
+
+          <td className="CID">チャンネルID:<br/>{listchannel}
+          <input 
+          type="text" 
+          name="channel" 
+          placeholder="ﾁｬﾝﾈﾙURLをｺﾋﾟﾍﾟ" 
+          className="videoAddInput"
+          onChange={handleChangeChannel}
+         value={channelId2}
+         maxLength="60"       
+          ></input></td>
+
+          <td>キーワード:
+            {listkeyword}<br/>
             <input 
-                 type="text" 
-                 placeholder="ｷｰﾜｰﾄﾞを入れてね" 
-                 className="videoAddInput"
-                  onChange={handleChangeKeyword}
-                  value={keyword}
-                />
-                <Button variant="outlined" color="secondary">固定</Button>
-          </form>
-                
-       </div>
-      <div style={{marginTop: '5px', textAlign:'center'}}>
-        <form onSubmit={handleSubmit}>
-      
-        <input 
-        type="text" 
-        placeholder="ﾁｬﾝﾈﾙURLをﾄﾞﾗｯｸﾞ" 
-        className="videoAddInput"
-        onChange={handleChangeChannel}
-        value={channelId}
-        />
-        <Button variant="outlined" color="success">検索</Button>
-      </form>
+          type="text" 
+          name="keyword"
+          placeholder="ｷｰﾜｰﾄﾞを入れてね" 
+          className="videoCardTitleInput"
+          onChange={handleChangeKeyword}
+          value={keyword2}
+          ></input></td>
+
+           <td>
+           <Button variant="contained" onClick={() => submit(listid)}> 編集確定</Button>
+            <button onClick={handleClose}>   <ClearIcon /></button>
+          </td>
+           </Stack>
+           </tr>
+            </table>
+           
+        </form>
+      :
+      <div>
+
+      <Button variant="contained">
+      <Stack spacing={2}>
+        <h1>リスト表示/編集</h1>
+        <h1>タイトル:{listtitle}</h1>
+        <h1>キーワード:{listkeyword}</h1>
+      </Stack>
+        </Button>
+     <Stack spacing={2}>
+      <Youtube
+           listtitle={list.title}
+           listkeyword={list.keyword}
+           listchannel={list.channel}
+          />
+      </Stack>
+
       </div>
-      
+     
+      }
+
+      </div>
     </div>
+
+    
   );
 };
 

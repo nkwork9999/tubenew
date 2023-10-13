@@ -1,29 +1,27 @@
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-
+import { useForm } from '@inertiajs/react';
 export const VideoCardDeleteButton =({
-  videoCardsList,
-  setVideoCardsList,
-  videoCard,
+  list,
 }) => {
-  const videoCardDeleteButton =(id) => {
-    setVideoCardsList(videoCardsList.filter((e) => e.id !== id));
+ 
+  const { delete: destory } = useForm();
+  const handleDelete = (id) => {
+    console.log("delete",id)
+      destory(route("list.destroy", id), {
+          preserveScroll: true,
+      });
   };
+
   return (
     <div>
-          <IconButton 
-       
-          className="videoCardDeleteButton" 
-          onClick={() => videoCardDeleteButton(videoCard.id)} aria-label="delete">
-            <DeleteIcon />
-            </IconButton>
-      
+    
+    <div>
+          <IconButton className="videoCardDeleteButton" onClick={() => handleDelete(list.id)} aria-label="delete"><DeleteIcon /></IconButton>
     </div>
-    //<button
-      //className="videoCardDeleteButton" 
-      //onClick={() => videoCardDeleteButton(videoCard.id)}
-      //>×</button>
+ 
+    </div>  
   );
 };
 
