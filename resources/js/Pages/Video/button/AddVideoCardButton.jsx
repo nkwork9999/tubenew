@@ -34,7 +34,6 @@ export const AddVideoCardButton =({videoCardsList,setVideoCardsList,lists})=> {
     });
 
     const handleChange = (e) =>{
-      
       setData(e.target.name, e.target.value)
     };
     const handleChangeChannel= (e) =>{
@@ -43,8 +42,6 @@ export const AddVideoCardButton =({videoCardsList,setVideoCardsList,lists})=> {
     const handleChangeKeyword = (e) =>{
       setData(e.target.name, e.target.value)
     };
-  
-  
 
     const customStyles = {
       content: {
@@ -60,60 +57,52 @@ export const AddVideoCardButton =({videoCardsList,setVideoCardsList,lists})=> {
 
   return (
     <div>
-      <div>
-
-      <Modal 
-      open={showModal} 
-      onClose={modalClose}
-      style={customStyles}>
-          <Card >
-      <div>
-        <ClearIcon onClick={modalClose}/>
-    <form  >
-  <div className="register">
-
-      <input 
-        className="textinput"
-        //autoFocus
-        type="text" 
-        name="title"
-        placeholder="リストのタイトルを10文字以内で入れてね"
-        maxLength="10"
-        onChange={handleChange}
-        />
-      <input 
-      className="textinput"
-      type="text" 
-      name="channel"
-      placeholder="最新の動画を見たいチャンネルURLをコピー＆ペーストしてきてね(無しだとyoutubeからキーワードのみに応じた動画を検索するよ)" 
-      Length="10"
-      onChange={handleChangeChannel}
-      /> 
-      <input 
-       className="textinput"
-      type="text" 
-      name="keyword"
-      placeholder="入力したキーワードに関連するチャンネル内の最新動画を5件表示するよ(無しだとチャンネル内の最新動画5件)" 
-      onChange={handleChangeKeyword}
-      />
-  
+        <div>
+          <Modal 
+          open={showModal} 
+          onClose={modalClose}
+          style={customStyles}>
+            <Card >
+              <div>
+                <ClearIcon onClick={modalClose}/>
+              <form>
+                <div className="register">
+                  <input 
+                  className="textinput"
+                  //autoFocus
+                  type="text" 
+                  name="title"
+                  placeholder="リストのタイトルを10文字以内で入れてね"
+                  maxLength="10"
+                  onChange={handleChange}
+                  />
+                  <input 
+                  className="textinput"
+                  type="text" 
+                  name="channel"
+                  placeholder="最新の動画を見たいチャンネルURLをコピー＆ペーストしてきてね" 
+                  Length="10"
+                  onChange={handleChangeChannel}
+                  /> 
+                  <input 
+                  className="textinput"
+                  type="text" 
+                  name="keyword"
+                  placeholder="入力したキーワードに関連するチャンネル内の最新動画を5件表示するよ(無しだとチャンネル内の最新動画5件)" 
+                  onChange={handleChangeKeyword}
+                  />
+                </div>
+                 <Button onClick={addVideoCard}>リストを登録</Button>
+              </form>
+              </div>
+            </Card>
+          </Modal>
+    
+        </div>
+        <Fab className ="addTaskCardButton"  color="primary" aria-label="add" >
+          <AddIcon onClick={Show}/>
+        </Fab>
     </div>
-  <Button onClick={addVideoCard}>リストを登録</Button>
-   </form>
-  </div>
-  </Card>
-      </Modal>
-  
-</div>
-<Fab className ="addTaskCardButton"  color="primary" aria-label="add" >
-  
-      <AddIcon onClick={Show}/>
-      </Fab>
-
-
-
-
-</div>
   );
 };
 

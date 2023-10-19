@@ -56,9 +56,9 @@ class ListsController extends Controller
         $list->title = $request->title;
         $list->channel = $request->channel;
         $list->keyword = $request->keyword;
-        
         $list->save();
-       // dd($list);
+
+      
       //  Lists::create([
       //       'user_id'=> $aid->user_id,
       //      'title' => $request->title,
@@ -66,7 +66,6 @@ class ListsController extends Controller
       //      'keyword' => $request->keyword,
       //  ]);
 
-        
             return to_route('dashboard');
            
       
@@ -93,20 +92,20 @@ class ListsController extends Controller
      */
     public function update(UpdateListsRequest $request ,$id)
     {
-       // dd($id);
+        
       
-       // $request->validate([
-       //     'title' => ['required'],
-        //    'keyword' => ['required']
-       // ]);
+        $request->validate([
+            'title' => ['required'],
+           // 'channel' => ['required'],
+           // 'keyword' => ['required'],
+        ]);
         
         $update = Lists::find($id);
-    
         $update->title = $request->title;
         $update->keyword = $request->keyword;
         $update->channel = $request->channel;
         $update->save();
-      
+     
         return redirect()->route('dashboard');
     }
 
