@@ -21,6 +21,6 @@ PHP 8.2.6
 Laravel 4.5.0
 React 18.2.0
 mysql 14.14
-Youtuve Data API v3
+Youtube Data API v3
 
 
