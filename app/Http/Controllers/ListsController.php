@@ -17,15 +17,11 @@ class ListsController extends Controller
     {
        //$lists = User::find(1);
    // $user_id = Auth::id();
-
      // $lists=Lists::with('user')->where('user_id','=',$user_id);
      //$lists = User::all();
 
     $lists=\Auth::user()->lists()->get();
-    //dd($lists);
-
-
-        return Inertia::render('Dashboard',['lists'=>$lists]);
+    return Inertia::render('Dashboard',['lists'=>$lists]);
       
     }
 
@@ -44,11 +40,11 @@ class ListsController extends Controller
     {
        
      
-     //   $request->validate([
-     //       'title' => ['required','max:10'],
+        $request->validate([
+            'title' => ['required','max:10'],
      //       'channel' => ['required'],
      //       'keyword' => ['required']
-     //   ]);
+        ]);
        
         $list = new Lists;
         //投稿する際に、ログインしている人のIDが保存されるようにします。
@@ -58,13 +54,6 @@ class ListsController extends Controller
         $list->keyword = $request->keyword;
         $list->save();
 
-      
-      //  Lists::create([
-      //       'user_id'=> $aid->user_id,
-      //      'title' => $request->title,
-      //      'channel' => $request->channel,
-      //      'keyword' => $request->keyword,
-      //  ]);
 
             return to_route('dashboard');
            
@@ -95,7 +84,7 @@ class ListsController extends Controller
         
       
         $request->validate([
-            'title' => ['required'],
+            'title' => ['required','max:10'],
            // 'channel' => ['required'],
            // 'keyword' => ['required'],
         ]);

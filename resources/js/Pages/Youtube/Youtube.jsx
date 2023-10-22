@@ -41,7 +41,7 @@ export const Youtube = ({
           const params = {
             key: YOUTUBE_API_KEY,
             q: ( listkeyword === null) ? '' : listkeyword, // 検索キーワード
-            channelId:( CID === null) ? '' : CID,       //入力カスタムIDから変換したチャンネルID
+            channelId:( CID === 'UCEntWOceT_4muzGj1xYKauQ') ? '' : CID,       //入力カスタムIDから変換したチャンネルID
             type: "video", 
             maxResults: "5", // 結果の最大数
             order: "date", // 新しい順
@@ -50,7 +50,7 @@ export const Youtube = ({
             //入力したキーワード、チャンネルIDからyoutubeAPI情報を得るため変換
             const queryParams = new URLSearchParams(params).toString();
             const lastUrl= YOUTUBE_SEARCH_API_URI + queryParams
-     
+            console.log("queryParams",CID)
             axios
             .get(lastUrl)
             .then(response => {                  
@@ -59,6 +59,7 @@ export const Youtube = ({
           }
 
         }, [CID]);
+        console.log("length",V.length)
   const video =V.map((video,index)=>{
     const url2 = 'https://www.youtube.com/embed/' + video.id.videoId;
     //console.log(video)
@@ -76,13 +77,20 @@ export const Youtube = ({
             </div>
             )
   });
-          return(
-            <div style={{marginTop:'10px'}}>
-             <div key={listid}>{video}</div>
-            
-            
-            </div>
-          )
+  if (V.length === 0) {  
+    return (
+      <div>検索結果は0でした。<br/>検索可能ワードでも表示されない場合API制限の可能性があります。</div>
+    )
+} else {
+  return(
+    <div style={{marginTop:'10px'}}>
+     <div key={listid}>{video}</div>
+    
+    
+    </div>
+    )
+}
+        
         };
 
   //{video}

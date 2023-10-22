@@ -18,21 +18,21 @@ export const VideoAddInput =({
 })=> {
   const [isClick,setIsClick] = useState(false);
   const [inputCardTitle,setInputCardTitle] = useState("");
-  const {  data,setData,processing,patch,errors } = useForm({
+  const {  data,setData,processing,patch,setError,register } = useForm({
     id:{listid},
     title: '',
     channel:'',
     keyword: '',
   });
-  const [Listtitle,setListtitle]=useState("")
+  const [Listtitle,setListtitle]=useState(listtitle)
   const [Listkeyword,setListKeyword]=useState("")
   const [ListchannelId,setListChannelId]=useState("") 
+ 
   const handleClick = () =>{
     setIsClick(true);
   };
-  const handleClose = ()=>{
-    setIsClick(false);
-  };
+
+  
   const handleChange = (e) =>{
     setListtitle(e.target.value);
     setData(e.target.name, e.target.value)
@@ -46,8 +46,10 @@ export const VideoAddInput =({
     setData(e.target.name, e.target.value)
   };
   const submit =(id)=>{
-    patch(route('list.update',id));
-  };
+      patch(route('list.update',id));
+    };
+    
+  
 
   return (
       <div onClick={handleClick}>  
@@ -65,6 +67,7 @@ export const VideoAddInput =({
                 onChange={handleChange} 
                 value={Listtitle}
                 maxLength="10"
+                required
                 ></input></td>
 
                 <td className="CID">チャンネルID:<br/>{listchannel}
@@ -91,17 +94,21 @@ export const VideoAddInput =({
 
                 <td>
                 <button onClick={() => submit(listid)}><Button variant="contained" > 編集確定</Button></button>
-                <button onClick={handleClose}>   <ClearIcon /></button>
+              <button type="submit" formnovalidate="formnovalidate"><ClearIcon /></button>
                 </td>
               </Stack>
             </tr>
           </table> 
+           
         </form>
+      
         :
         <div>
+          
           <Button variant="contained">
           <Stack spacing={2}>
-            <h1>リスト表示/編集</h1>
+            <h1>リストの内容を編集</h1>
+         
             <h1>タイトル:{listtitle}</h1>
             <h1>キーワード:{listkeyword}</h1>
           </Stack>

@@ -69,18 +69,18 @@ export const AddVideoCardButton =({videoCardsList,setVideoCardsList,lists})=> {
                 <div className="register">
                   <input 
                   className="textinput"
-                  //autoFocus
                   type="text" 
                   name="title"
-                  placeholder="リストのタイトルを10文字以内で入れてね"
+                  placeholder="リストのタイトルを10文字以内で入れてね(タイトルを入力しないとリストは作成されないよ)"
                   maxLength="10"
                   onChange={handleChange}
+                  required:true
                   />
                   <input 
                   className="textinput"
                   type="text" 
                   name="channel"
-                  placeholder="最新の動画を見たいチャンネルURLをコピー＆ペーストしてきてね" 
+                  placeholder="最新の動画を見たいチャンネルURLをコピー＆ペーストしてきてね(無しだとyoutube全体から検索)" 
                   Length="10"
                   onChange={handleChangeChannel}
                   /> 
