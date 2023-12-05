@@ -24,7 +24,7 @@ export const VideoAddInput =({
     channel:'',
     keyword: '',
   });
-  const [Listtitle,setListtitle]=useState(listtitle)
+  const [Listtitle,setListtitle]=useState("")
   const [Listkeyword,setListKeyword]=useState("")
   const [ListchannelId,setListChannelId]=useState("") 
  
